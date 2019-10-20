@@ -17,6 +17,7 @@ void Print(int Arr[ROWS][COLS], const int ROWS, const int COLS);
 void Sort(int Arr[], const int n);
 void Sort(double Arr[], const int n);
 void Sort(char Arr[], const int n);
+void Sort(int Arr[ROWS][COLS], const int ROWS, const int COLS);
 
 int Sum(int Arr[], const int n);
 double Sum(double Arr[], const int n);
@@ -89,6 +90,8 @@ void main()
 	cout<< "Среднее арифметическое элементов массива: " << Avg(Drr, ROWS,COLS) << endl;
 	cout << "Минимальное значение: " << minValueIn(Drr, ROWS, COLS) << endl;
 	cout << "максимальное значение: " << maxValueIn(Drr, ROWS, COLS) << endl;
+	Sort(Drr, ROWS, COLS);
+	Print(Drr, ROWS, COLS);
 
 }
 void FillRand(int Arr[], const int n)
@@ -224,6 +227,37 @@ void Sort(char Arr[], const int n)
 			}
 		}
 	}
+}
+
+void Sort(int Arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	int iteration = 0;
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			for (int k = i; k < ROWS; k++)
+			{
+				//int l = 0;
+				/*if (k == i) l = j + 1;
+				else l = 0;*/
+				//int l = (k == i) ? j + 1:0;
+				for (int l = k == i ? j + 1 : 0; l < COLS; l++)
+				{
+					//Если перебираемый элемент меньше, чем выбранный их нужно поменять местами
+					if (Arr[k][l] < Arr[i][j])
+					{
+						int buffer = Arr[i][j];
+						Arr[i][j] = Arr[k][l];
+						Arr[k][l] = buffer;
+					}
+					iteration++;
+				}
+			}
+			
+		}
+	}
+	cout << "Массив отсортирован за " << iteration << " итераций"<<endl;
 }
 
 int Sum(int Arr[ROWS][COLS], const int ROWS, const int COLS)
